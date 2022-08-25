@@ -13,6 +13,9 @@ public class BoardDaoImpl implements BoardDao {
     @Autowired
     private SqlSession session;
     private String namespace="com.myportfolio.web.dao.BoardMapper.";
+    public int count() throws Exception {
+        return session.selectOne(namespace+"count");
+    }
     @Override
     public BoardDto select(int bno) throws Exception{
        return session.selectOne(namespace+"select",bno);
@@ -20,6 +23,14 @@ public class BoardDaoImpl implements BoardDao {
     @Override
     public List<BoardDto> selectTitle(String title) throws Exception{
         return session.selectOne(namespace+"selectTitle",title);
+    }
+    @Override
+    public List<BoardDto> selectAll() throws Exception {
+        return session.selectList(namespace+"selectAll");
+    }
+    @Override
+    public List<BoardDto> selectPage(Map map) throws Exception {
+        return session.selectList(namespace+"selectPage",map);
     }
     @Override
     public int insert(BoardDto dto) throws Exception{

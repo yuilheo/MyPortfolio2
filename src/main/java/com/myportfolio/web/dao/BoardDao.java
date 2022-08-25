@@ -3,12 +3,17 @@ package com.myportfolio.web.dao;
 import com.myportfolio.web.domain.BoardDto;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BoardDao {
+    int count() throws Exception;
     BoardDto select(int bno) throws Exception;
 
     List<BoardDto> selectTitle(String title) throws Exception;
 
+    List<BoardDto> selectAll() throws Exception;
+
+    List<BoardDto> selectPage(Map map) throws Exception;
     int insert(BoardDto dto) throws Exception;
 
     int update(BoardDto dto) throws Exception;

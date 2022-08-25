@@ -3,6 +3,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.myportfolio.web.dao.BoardMapper">
+    <select id="count" resultType="int">
+        SELECT count(*)
+        FROM board
+    </select>
     <select id="select" parameterType="int" resultType="BoardDto">
         select bno,
                title,
@@ -28,6 +32,31 @@
                up_date
         from board
         where title = #{title};
+    </select>
+    <select id="selectAll" resultType="BoardDto">
+        SELECT bno,
+            title,
+            content,
+            writer,
+            b_id,
+            v_cnt,
+            c_cnt,
+            reg_date
+        FROM board
+        ORDER BY reg_date DESC, bno DESC
+    </select>
+    <select id="selectPage" parameterType="map" resultType="BoardDto">
+        SELECT bno,
+               title,
+               content,
+               writer,
+               b_id,
+               v_cnt,
+               c_cnt,
+               reg_date
+        FROM board
+        ORDER BY reg_date DESC, bno DESC
+        LIMIT #{offset}, #{pageSize}
     </select>
     <insert id="insert" parameterType="BoardDto">
         INSERT INTO board
