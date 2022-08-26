@@ -8,7 +8,7 @@ public class UserDto {
     private String pwd;
     private String nick_name;
     private String email;
-    private String address;
+    private String adress;
     private Date reg_date;
     private String grade;
 
@@ -44,12 +44,12 @@ public class UserDto {
         this.email = email;
     }
 
-    public String getAddress() {
-        return address;
+    public String getAdress() {
+        return adress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAdress(String adress) {
+        this.adress = adress;
     }
 
     public Date getReg_date() {
@@ -67,13 +67,13 @@ public class UserDto {
     public void setGrade(String grade) {
         this.grade = grade;
     }
-
-    public UserDto(String id, String pwd, String nick_name, String email, String address) {
+    public UserDto(){}
+    public UserDto(String id, String pwd, String nick_name, String email, String adress) {
         this.id = id;
         this.pwd = pwd;
         this.nick_name = nick_name;
         this.email = email;
-        this.address = address;
+        this.adress = adress;
     }
 
     @Override
@@ -81,12 +81,12 @@ public class UserDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserDto userDto = (UserDto) o;
-        return Objects.equals(id, userDto.id) && Objects.equals(pwd, userDto.pwd) && Objects.equals(nick_name, userDto.nick_name) && Objects.equals(email, userDto.email) && Objects.equals(address, userDto.address);
+        return Objects.equals(id, userDto.id) && Objects.equals(pwd, userDto.pwd) && Objects.equals(nick_name, userDto.nick_name) && Objects.equals(email, userDto.email) && Objects.equals(adress, userDto.adress);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, pwd, nick_name, email, address);
+        return Objects.hash(id, pwd, nick_name, email, adress);
     }
 
     @Override
@@ -96,7 +96,7 @@ public class UserDto {
                 ", pwd='" + pwd + '\'' +
                 ", nick_name='" + nick_name + '\'' +
                 ", email='" + email + '\'' +
-                ", address='" + address + '\'' +
+                ", address='" + adress + '\'' +
                 ", reg_date=" + reg_date +
                 ", grade='" + grade + '\'' +
                 '}';

@@ -3,6 +3,31 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.myportfolio.web.dao.UserMapper">
+    <delete id="delete" parameterType="String">
+        delete from user where id = #{id}
+    </delete>
+<!--    <delete id="deleteAll">-->
+<!--        delete from user-->
+<!--    </delete>-->
+    <select id="selectUser" parameterType="String" resultType="UserDto">
+        select id, pwd, nick_name, email, adress, reg_date, grade
+        from user
+        where id = #{id}
+    </select>
+    <select id="selectCnt" resultType="int">
+        select count(*)
+        from user
+    </select>
+    <insert id="insertUser" parameterType="UserDto">
+        insert into user(id,pwd,nick_name,email,adress,reg_date)
+        values (#{id},#{pwd},#{nick_name},#{email},#{adress},now())
+    </insert>
 
-
+    <update id="update" parameterType="Map">
+        update user set pwd = #{pwd},nick_name = #{nick_name},email= #{email},adress= #{adress} where id = #{id};
+    </update>
+    <update id="updateGrade" parameterType="String">
+        update user set grade = 'master'
+        where id = #{id}
+    </update>
 </mapper>

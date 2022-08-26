@@ -22,7 +22,7 @@ public class BoardDaoImpl implements BoardDao {
     }
     @Override
     public List<BoardDto> selectTitle(String title) throws Exception{
-        return session.selectOne(namespace+"selectTitle",title);
+        return session.selectList(namespace+"selectTitle",title);
     }
     @Override
     public List<BoardDto> selectAll() throws Exception {
