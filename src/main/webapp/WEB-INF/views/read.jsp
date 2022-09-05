@@ -1,8 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%--글 읽기--%>
+<!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
+	<meta charset="UTF-8">
+	<title>hello</title>
 </head>
 <body>
 <h1>
