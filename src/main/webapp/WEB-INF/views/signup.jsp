@@ -8,7 +8,7 @@
 	<title>hello</title>
 </head>
 <body>
-<form action="<c:url value =''/>" method="post" onsubmit="return Check(this);">
+<form action="<c:url value ='/signup'/>" method="post" onsubmit="return Check(this);">
 	<input type="text" name="email" placeholder="email 입력">
 	<input type="text" name="id" placeholder="id 입력">
 	<input type="text" name="nick_name" placeholder="닉네임 입력">
@@ -20,15 +20,15 @@
 			if(a.id.value.length==0){
 				alert('id를 입력해주세요');
 				return false;
-			} else if(a.id.value.length>13){
-				alert('id는 12을 초과했습니다');
+			} else if(a.id.value.length>13||a.id.value.length<5){
+				alert('id는 5~12글자입니다');
 				return false;
 			}
 			if(a.pwd.value.length==0){
 				alert('pwd를 입력해주세여');
 				return false;
-			} else if(a.pwd.value.length>16){
-				alert('pwd는 16을 초과했습니다');
+			} else if(a.pwd.value.length>16||a.pwd.value.length<6){
+				alert('pwd는 6~15글자입니다');
 				return false;
 			}
 

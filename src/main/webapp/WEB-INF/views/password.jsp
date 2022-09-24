@@ -5,13 +5,12 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>hello</title>
+	<title>home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+<form action="<c:url value =''/>" method="post">
+	<input type="text" name="email" placeholder="email 입력">
+	<button>비밀번호 찾기</button>
+</form>
 </body>
 </html>

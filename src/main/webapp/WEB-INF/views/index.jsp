@@ -8,10 +8,17 @@
 	<title>hello</title>
 </head>
 <body>
-<h1>
-	Hello world!
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+<div id="list">
+	<u1>
+		<li><a href="<c:url value='/'/>">home</a></li>
+		<li><a href="<c:url value='/signup'/>">Signup</a></li>
+		<li><a href="<c:url value='/list'/>">list</a></li>
+	</u1>
+	<form action="<c:url value =''/>" method="post">
+		<input type="text" name="id" placeholder="id 입력">
+		<input type="text" name="pwd" placeholder="패스워드 입력">
+		<button>로그인</button>
+	</form>
+</div>
 </body>
 </html>

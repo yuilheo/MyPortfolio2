@@ -30,6 +30,6 @@ public class BoardController {
         } catch (Exception e){
             e.printStackTrace();
         }
-        return "boardList";
+        return "list";
     }
 }
