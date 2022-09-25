@@ -11,6 +11,10 @@ public interface UserDao {
 
     int selectCnt() throws Exception;
 
+    String selectID(String email) throws Exception;
+
+    String selectPwd(String id) throws Exception;
+
     int insertUser(UserDto userDto) throws Exception;
 
 

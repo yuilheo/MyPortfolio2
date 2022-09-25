@@ -24,6 +24,14 @@ public class UserServiceimpl implements UserService {
         return userDao.selectCnt();
     }
     @Override
+    public String selectUserID(String email) throws Exception{
+        return userDao.selectID(email);
+    }
+    @Override
+    public String selectUserPwd(String id) throws Exception{
+        return userDao.selectPwd(id);
+    }
+    @Override
     public int signUp(UserDto userDto)throws Exception{
         return userDao.insertUser(userDto);
     }

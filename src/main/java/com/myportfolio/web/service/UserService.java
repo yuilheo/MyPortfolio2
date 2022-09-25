@@ -9,6 +9,10 @@ public interface UserService {
 
     int selectUserHap() throws Exception;
 
+    String selectUserID(String email) throws Exception;
+
+    String selectUserPwd(String id) throws Exception;
+
     int signUp(UserDto userDto) throws Exception;
 
     int updateUser(String id, String pwd, String nick_name, String email, String adress) throws Exception;

@@ -30,6 +30,14 @@ public class UserDaoImpl implements UserDao {
         return session.selectOne(namespace+"selectCnt");
     }
     @Override
+    public String selectID(String email) throws Exception{
+        return session.selectOne(namespace+"selectID",email);
+    }
+    @Override
+    public String selectPwd(String id) throws Exception{
+        return session.selectOne(namespace+"selectPwd",id);
+    }
+    @Override
     public int insertUser(UserDto userDto)throws Exception{
         return session.insert(namespace+"insertUser",userDto);
     }

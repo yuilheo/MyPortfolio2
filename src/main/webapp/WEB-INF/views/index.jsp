@@ -14,11 +14,14 @@
 		<li><a href="<c:url value='/signup'/>">Signup</a></li>
 		<li><a href="<c:url value='/list'/>">list</a></li>
 	</u1>
-	<form action="<c:url value =''/>" method="post">
+</div>
+	<form action="<c:url value ='/login'/>" method="post">
 		<input type="text" name="id" placeholder="id 입력">
-		<input type="text" name="pwd" placeholder="패스워드 입력">
+		<input type="password" name="pwd" placeholder="패스워드 입력">
 		<button>로그인</button>
 	</form>
-</div>
+<form action="<c:url value ='/find'/>" method="get">
+	<button>아이디 비밀번호 찾기</button>
+</form>
 </body>
 </html>
