@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 @Controller
 public class SignupController {
 
@@ -18,12 +21,15 @@ public class SignupController {
     }
 
     @PostMapping("/signup")
-    public String signup2(UserDto userDto){
+    public String signup2(UserDto userDto) throws UnsupportedEncodingException {
+        String msg;
         try {
             userService.signUp(userDto);
-            return "index";
+            msg = URLEncoder.encode("회원가입에 성공했습니다","utf-8");
+            return "redirect:/?msg="+msg;
         } catch (Exception e) {
-            return "signup";
+            msg = URLEncoder.encode("회원가입에 실패했습니다","utf-8");
+            return "redirect:/signup?msg="+msg;
         }
     }
 }

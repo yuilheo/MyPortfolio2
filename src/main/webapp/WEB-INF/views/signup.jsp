@@ -8,6 +8,11 @@
 	<title>hello</title>
 </head>
 <body>
+<c:if test="${not empty param.msg}">
+	<script>
+		alert("${param.msg}");
+	</script>
+</c:if>
 <form action="<c:url value ='/signup'/>" method="post" onsubmit="return Check(this);">
 	<input type="text" name="email" placeholder="email 입력">
 	<input type="text" name="id" placeholder="id 입력">
