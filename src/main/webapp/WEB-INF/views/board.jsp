@@ -5,6 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>hello</title>
+	<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 </head>
 <body>
 <c:if test="${not empty param.msg}">
@@ -38,35 +39,28 @@
 </c:if>
 </div>
 <div>
-	<table>
-		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>이름</th>
-			<th>등록일</th>
-			<th>조회수</th>
-		</tr>
-		<c:forEach var="board" items="${list}">
-		<tr>
-			<td>${board.bno}</td>
-			<td><a href="<c:url value='/read?bno=${board.bno}&page=${page}&pageSize=${pageSize}'/>"> ${board.title}</a></td>
-			<td>${board.writer}</td>
-			<td>${board.reg_date}</td>
-			<td>${board.v_cnt}</td>
-		</tr>
-		</c:forEach>
-	</table>
+	<form action="" id="form">
+		<input type="text" name ="bno" value="${boardDto.bno}" readonly="readonly">
+		<input type="text" name = "title" value="${boardDto.title}"readonly="readonly">
+		<textarea name="content" id="" cols="30" rows="10" readonly="readonly">${boardDto.content}</textarea>
+		<button type="button" id="writebtn" class="btn">등록</button>
+		<button type="button" id="modifybtn" class="btn">수정</button>
+		<button type="button" id="removebtn" class="btn">삭제</button>
+		<button type="button" id="listbtn" class="btn">목록</button>
+	</form>
 </div>
-<div>
-	<c:if test="${ph.showPrev}">
-		<a href="<c:url value='/?page=${ph.b_page-1}&pageSize=${ph.p_size}'/>">&lt;</a>
-	</c:if>
-	<c:forEach var="i" begin="${ph.b_page}" end="${ph.e_page}">
-		<a href="<c:url value='/?page=${i}&pageSize=${ph.p_size}'/>">${i}</a>
-	</c:forEach>
-	<c:if test="${ph.showNext}">
-		<a href="<c:url value='/?page=${ph.e_page+1}&pageSize=${ph.p_size}'/>">&gt;</a>
-	</c:if>
-</div>
+<script>
+	$(document).ready(function (){
+		$('#listbtn').on("click",function (){
+			location.href = "<c:url value='/'/>?page=${page}&pageSize=${pageSize}";
+		});
+		$('#removebtn').on("click",function (){
+			let form = $('#form');
+			form.attr("action","<c:url value='/remove'/>?page=${page}&pageSize=${pageSize}");
+			form.attr("method","post");
+			form.submit();
+		});
+	});
+</script>
 </body>
 </html>

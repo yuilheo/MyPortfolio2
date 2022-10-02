@@ -93,7 +93,7 @@ public class PageHandler {
         this.p_size = p_size;
 
         t_page = (int)Math.ceil((double)t_cnt / p_size);
-        b_page = page/n_size * n_size + 1 ;
+        b_page = (page-1)/n_size * n_size + 1 ;
         e_page = Math.min(b_page +  n_size-1, t_page);
         showPrev = b_page != 1;
         showNext = e_page != t_page;
