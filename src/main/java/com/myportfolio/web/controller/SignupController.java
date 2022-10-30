@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -21,15 +22,17 @@ public class SignupController {
     }
 
     @PostMapping("/signup")
-    public String signup2(UserDto userDto) throws UnsupportedEncodingException {
+    public String signup2(UserDto userDto, RedirectAttributes rattr){
         String msg;
         try {
             userService.signUp(userDto);
-            msg = URLEncoder.encode("회원가입에 성공했습니다","utf-8");
-            return "redirect:/?msg="+msg;
+            msg = "회원가입에 성공했습니다";
+            rattr.addFlashAttribute("msg",msg);
+            return "redirect:/";
         } catch (Exception e) {
-            msg = URLEncoder.encode("회원가입에 실패했습니다","utf-8");
-            return "redirect:/signup?msg="+msg;
+            msg = "회원가입에 실패했습니다";
+            rattr.addFlashAttribute("msg",msg);
+            return "redirect:/signup";
         }
     }
 }

@@ -25,6 +25,7 @@ public class UserDaoImpl implements UserDao {
     public UserDto selectUser(String id) throws Exception {
         return session.selectOne(namespace+"selectUser",id);
     }
+
     @Override
     public int selectCnt()throws Exception{
         return session.selectOne(namespace+"selectCnt");

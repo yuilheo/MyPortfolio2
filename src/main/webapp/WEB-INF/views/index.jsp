@@ -7,16 +7,15 @@
 	<title>hello</title>
 </head>
 <body>
-<c:if test="${not empty param.msg}">
+<c:if test="${not empty msg}">
 	<script>
-		alert("${param.msg}");
+		alert("${msg}");
 	</script>
 </c:if>
 <div id="list">
 	<u1>
 		<li><a href="<c:url value='/'/>">home</a></li>
 		<li><a href="<c:url value='/signup'/>">Signup</a></li>
-		<li><a href="<c:url value='/write'/>">write</a></li>
 	</u1>
 </div>
 <div>
@@ -38,6 +37,7 @@
 </c:if>
 </div>
 <div>
+	<button type="button" id="writeBtn" onclick="location.href='<c:url value="/write"/>'">글쑤기</button>
 	<table>
 		<tr>
 			<th>번호</th>

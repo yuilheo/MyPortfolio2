@@ -61,14 +61,12 @@
     <insert id="insert" parameterType="BoardDto">
         INSERT INTO board
             (title,content,writer,b_id)
-        values
+        VALUES
             (#{title},#{content},#{writer},#{b_id})
     </insert>
     <update id="update" parameterType="BoardDto">
         update board
-        SET title = #{title}
-          ,content = #{content}
-          ,up_date = now()
+        SET title = #{title},content = #{content},up_date = now()
         Where bno = #{bno}
     </update>
     <update id="inVCnt" parameterType="int">
@@ -87,5 +85,28 @@
     <delete id="deleteAll">
         DELETE FROM board
     </delete>
+    <select id="searchSelectPage" parameterType="SearchCondition" resultType="BoardDto">
+        SELECT bno,
+               title,
+               content,
+               writer,
+               b_id,
+               v_cnt,
+               c_cnt,
+               reg_date
+        FROM board
+        WHERE true
+        And title like concat('#',#{keyword},'#')
+        ORDER BY reg_date DESC, bno DESC
+            LIMIT #{offset}, #{pageSize}
+    </select>
 
+    <select id="searchResultCnt" parameterType="SearchCondition" resultType="BoardDto">
+        SELECT count(*)
+        FROM board
+        WHERE true
+          And title like concat('#',#{keyword},'#')
+        ORDER BY reg_date DESC, bno DESC
+            LIMIT #{offset}, #{pageSize}
+    </select>
 </mapper>

@@ -7,6 +7,7 @@ public interface UserService {
 
     UserDto selectUser(String id) throws Exception;
 
+
     int selectUserHap() throws Exception;
 
     String selectUserID(String email) throws Exception;

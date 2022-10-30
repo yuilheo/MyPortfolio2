@@ -19,7 +19,7 @@ public class BoardServiceimpl implements BoardService {
     @Override
     public int write(BoardDto boardDto)throws Exception{ //글쓰기
          return boardDao.insert(boardDto);
-    }
+     }
     @Override
     public int getCount() throws Exception{ // 글 총개수
          return boardDao.count();

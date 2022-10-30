@@ -8,9 +8,9 @@
 	<title>hello</title>
 </head>
 <body>
-<c:if test="${not empty param.msg}">
+<c:if test="${not empty msg}">
 	<script>
-		alert("${param.msg}");
+		alert("${msg}");
 	</script>
 </c:if>
 <form action="<c:url value ='/signup'/>" method="post" onsubmit="return Check(this);">

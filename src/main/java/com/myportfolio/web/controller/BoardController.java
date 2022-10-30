@@ -20,9 +20,10 @@ import java.util.Map;
 public class BoardController {
     @Autowired
     BoardService boardService;
+
     @PostMapping("/remove")
     public String remove(Integer bno, Integer page , Integer pageSize, Model m, HttpSession session){
-        String writer = (String)session.getAttribute("id");
+        String writer = (String)session.getAttribute("nick_name");
         try {
             boardService.remove(bno,writer);
         } catch (Exception e) {
@@ -31,6 +32,7 @@ public class BoardController {
         m.addAttribute("page");
         m.addAttribute("pageSize");
         return "redirect:/";
+
     }
     @GetMapping("/read")
     public String read(Integer bno,Integer page ,Integer pageSize,Model m){

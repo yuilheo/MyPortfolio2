@@ -1,6 +1,7 @@
 package com.myportfolio.web.dao;
 
 import com.myportfolio.web.domain.BoardDto;
+import com.myportfolio.web.domain.SearchCondition;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -60,6 +61,13 @@ public class BoardDaoImpl implements BoardDao {
         return session.delete(namespace+"delete",map);
     }
 
+    @Override
+    public List<BoardDto> searchSelectPage(SearchCondition sc) throws Exception {
+        return session.selectList(namespace+"searchSelectPage",sc);
+    }
 
+    public int searchResultCnt() throws Exception {
+        return session.selectOne(namespace+"searchResultCnt");
+    }
 
 }
