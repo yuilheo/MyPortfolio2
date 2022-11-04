@@ -23,10 +23,10 @@ public interface BoardDao {
 
     int inCCnt(int bno) throws Exception;
 
-    int deleteAll();
+    int deleteAll()throws Exception;
 
     int delete(Integer bno, String writer) throws Exception;
      List<BoardDto> searchSelectPage(SearchCondition sc) throws Exception;
-    int searchResultCnt() throws Exception;
+    int searchResultCnt(SearchCondition sc) throws Exception;
 }
 

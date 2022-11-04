@@ -37,6 +37,16 @@
 </c:if>
 </div>
 <div>
+	<form action="<c:url value="/"/>"  method="get">
+		<select  name="option">
+			<option value="A" ${ph.sc.option=='A' || ph.sc.option=='' ? "selected" : ""}>제목+내용</option>
+			<option value="T" ${ph.sc.option=='T' ? "selected" : ""}>제목만</option>
+			<option value="W" ${ph.sc.option=='W' ? "selected" : ""}>작성자</option>
+		</select>
+
+		<input type="text" name="keyword" class="search-input" type="text" value="${ph.sc.keyword}" placeholder="검색어를 입력해주세요">
+		<input type="submit"  value="검색">
+	</form>
 	<button type="button" id="writeBtn" onclick="location.href='<c:url value="/write"/>'">글쑤기</button>
 	<table>
 		<tr>
@@ -46,27 +56,32 @@
 			<th>등록일</th>
 			<th>조회수</th>
 		</tr>
-		<c:forEach var="board" items="${list}">
+		<c:forEach var="boardDto" items="${list}">
 		<tr>
-			<td>${board.bno}</td>
-			<td><a href="<c:url value='/read?bno=${board.bno}&page=${page}&pageSize=${pageSize}'/>"> ${board.title}</a></td>
-			<td>${board.writer}</td>
-			<td>${board.reg_date}</td>
-			<td>${board.v_cnt}</td>
+			<td>${boardDto.bno}</td>
+			<td><a href="<c:url value='/read${ph.sc.queryString}&bno=${boardDto.bno}'/>">${boardDto.title}</a></td>
+			<td>${boardDto.writer}</td>
+			<td>${boardDto.reg_date}</td>
+			<td>${boardDto.v_cnt}</td>
 		</tr>
 		</c:forEach>
 	</table>
 </div>
 <div>
+	<c:if test="${t_cnt==null || t_cnt==0}">
+		게시물이 없습니다
+	</c:if>
+<c:if test="${t_cnt!=null || t_cnt!=0}">
 	<c:if test="${ph.showPrev}">
-		<a href="<c:url value='/?page=${ph.b_page-1}&pageSize=${ph.p_size}'/>">&lt;</a>
+		<a href="<c:url value='/${ph.sc.getQueryString(ph.b_page-1)}'/>">&lt</a>
 	</c:if>
 	<c:forEach var="i" begin="${ph.b_page}" end="${ph.e_page}">
-		<a href="<c:url value='/?page=${i}&pageSize=${ph.p_size}'/>">${i}</a>
+		<a href="<c:url value='/${ph.sc.getQueryString(i)}'/>">${i}</a>
 	</c:forEach>
 	<c:if test="${ph.showNext}">
-		<a href="<c:url value='/?page=${ph.e_page+1}&pageSize=${ph.p_size}'/>">&gt;</a>
+		<a href="<c:url value='/${ph.sc.getQueryString(ph.e_page+1)}'/>">&gt</a>
 	</c:if>
+</c:if>
 </div>
 </body>
 </html>

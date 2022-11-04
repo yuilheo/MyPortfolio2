@@ -3,6 +3,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.myportfolio.web.dao.BoardMapper">
+
+    <sql id = "searchCondition">
+        <choose>
+            <when test='option=="T"'>
+                And title like concat('%',#{keyword},'%')
+            </when>
+            <when test='option=="W"'>
+                And writer like concat('%',#{keyword},'%')
+            </when>
+            <otherwise>
+                And title like concat('%',#{keyword},'%')
+                OR   writer like concat('%',#{keyword},'%')
+            </otherwise>
+        </choose>
+    </sql>
     <select id="count" resultType="int">
         SELECT count(*)
         FROM board
@@ -58,6 +73,21 @@
         ORDER BY reg_date DESC, bno DESC
         LIMIT #{offset}, #{pageSize}
     </select>
+    <select id="searchSelectPage" parameterType="SearchCondition" resultType="BoardDto">
+        SELECT bno,
+               title,
+               content,
+               writer,
+               b_id,
+               v_cnt,
+               c_cnt,
+               reg_date
+        FROM board
+        WHERE true
+        <include refid="searchCondition"/>
+        ORDER BY reg_date DESC, bno DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
     <insert id="insert" parameterType="BoardDto">
         INSERT INTO board
             (title,content,writer,b_id)
@@ -85,28 +115,12 @@
     <delete id="deleteAll">
         DELETE FROM board
     </delete>
-    <select id="searchSelectPage" parameterType="SearchCondition" resultType="BoardDto">
-        SELECT bno,
-               title,
-               content,
-               writer,
-               b_id,
-               v_cnt,
-               c_cnt,
-               reg_date
-        FROM board
-        WHERE true
-        And title like concat('#',#{keyword},'#')
-        ORDER BY reg_date DESC, bno DESC
-            LIMIT #{offset}, #{pageSize}
-    </select>
 
-    <select id="searchResultCnt" parameterType="SearchCondition" resultType="BoardDto">
+
+    <select id="searchResultCnt" parameterType="SearchCondition" resultType="int">
         SELECT count(*)
         FROM board
         WHERE true
-          And title like concat('#',#{keyword},'#')
-        ORDER BY reg_date DESC, bno DESC
-            LIMIT #{offset}, #{pageSize}
+        <include refid="searchCondition"/>
     </select>
 </mapper>

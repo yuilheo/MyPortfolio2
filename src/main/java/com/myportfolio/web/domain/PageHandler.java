@@ -1,11 +1,14 @@
 package com.myportfolio.web.domain;
 
+import org.springframework.web.util.UriComponentsBuilder;
+
 public class PageHandler {
     private int t_cnt;
-    private int p_size;
+
+    private SearchCondition sc;
     private int n_size = 10;
     private int t_page;
-    private int page;
+
     private int b_page;
     private int e_page;
     private boolean showPrev;
@@ -19,13 +22,7 @@ public class PageHandler {
         this.t_cnt = t_cnt;
     }
 
-    public int getP_size() {
-        return p_size;
-    }
 
-    public void setP_size(int p_size) {
-        this.p_size = p_size;
-    }
 
     public int getN_size() {
         return n_size;
@@ -43,13 +40,7 @@ public class PageHandler {
         this.t_page = t_page;
     }
 
-    public int getPage() {
-        return page;
-    }
 
-    public void setPage(int page) {
-        this.page = page;
-    }
 
     public int getB_page() {
         return b_page;
@@ -83,23 +74,34 @@ public class PageHandler {
         this.showNext = showNext;
     }
 
-    public PageHandler(int t_cnt, int page){
-        this(t_cnt,page,10);
+    public SearchCondition getSc() {
+        return sc;
     }
 
-    public PageHandler(int t_cnt,int page,int p_size){
-        this.t_cnt = t_cnt;
-        this.page = page;
-        this.p_size = p_size;
 
-        t_page = (int)Math.ceil((double)t_cnt / p_size);
-        b_page = (page-1)/n_size * n_size + 1 ;
+    public void setSc(SearchCondition sc) {
+        this.sc = sc;
+    }
+
+    public PageHandler(int t_cnt, SearchCondition sc){
+        this.t_cnt = t_cnt;
+        this.sc = sc;
+
+        doPaging(t_cnt,sc);
+
+    }
+
+    public void doPaging(int t_cnt,SearchCondition sc){
+        this.t_cnt = t_cnt;
+
+        t_page = (int)Math.ceil((double)t_cnt / sc.getPageSize());
+        b_page = (sc.getPage()-1)/n_size * n_size + 1 ;
         e_page = Math.min(b_page +  n_size-1, t_page);
         showPrev = b_page != 1;
         showNext = e_page != t_page;
     }
     void print(){
-        System.out.println("page = " + page);
+        System.out.println("page = " + sc.getPage());
         System.out.print(showPrev ? "[prev] " : "");
         for(int i = b_page ; i <= e_page ; i++){
             System.out.print(i + "");
@@ -111,10 +113,9 @@ public class PageHandler {
     public String toString() {
         return "PageHandler{" +
                 "t_cnt=" + t_cnt +
-                ", p_size=" + p_size +
+                ", sc=" + sc +
                 ", n_size=" + n_size +
                 ", t_page=" + t_page +
-                ", page=" + page +
                 ", b_page=" + b_page +
                 ", e_page=" + e_page +
                 ", showPrev=" + showPrev +

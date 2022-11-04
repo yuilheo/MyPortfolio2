@@ -2,6 +2,7 @@ package com.myportfolio.web.service;
 
 import com.myportfolio.web.dao.BoardDao;
 import com.myportfolio.web.domain.BoardDto;
+import com.myportfolio.web.domain.SearchCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +47,13 @@ public class BoardServiceimpl implements BoardService {
     public int modify(BoardDto boardDto) throws Exception{
          return boardDao.update(boardDto);
     }
-
+    @Override
+    public List<BoardDto> getSearchResultPage(SearchCondition sc) throws Exception{
+         return boardDao.searchSelectPage(sc);
+    }
+    @Override
+    public int getSearchResultCnt(SearchCondition sc)throws Exception{
+         return boardDao.searchResultCnt(sc);
+    }
 
 }

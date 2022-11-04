@@ -51,7 +51,7 @@
 <script>
 	$(document).ready(function (){
 		$('#listbtn').on("click",function (){
-			location.href = "<c:url value='/'/>?page=${page}&pageSize=${pageSize}";
+			location.href = "<c:url value='/'/>?page=${searchCondition.queryString}";
 		});
         $('#writebtn').on("click",function (){
             let form = $('#form');
@@ -69,14 +69,14 @@
                 $("#modifybtn").html("등록");
 				return;
             }
-            form.attr("action","<c:url value='/modify'/>");
+            form.attr("action","<c:url value='/${searchCondition.queryString}'/>");
             form.attr("method","post");
             form.submit();
         });
 		$('#removebtn').on("click",function (){
 			if(!confirm("정말로 삭제하시겠습니가?")) return;
 			let form = $('#form');
-			form.attr("action","<c:url value='/remove?page=${page}&pageSize=${pageSize}'/>");
+			form.attr("action","<c:url value='/remove?page=${searchCondition.queryString}'/>");
 			form.attr("method","post");
 			form.submit();
 		});

@@ -50,7 +50,7 @@ public class BoardDaoImpl implements BoardDao {
         return session.update(namespace+"inCCnt",bno);
     }
     @Override
-    public int deleteAll(){
+    public int deleteAll()throws Exception{
         return session.delete(namespace+"deleteALl");
     }
     @Override
@@ -65,9 +65,9 @@ public class BoardDaoImpl implements BoardDao {
     public List<BoardDto> searchSelectPage(SearchCondition sc) throws Exception {
         return session.selectList(namespace+"searchSelectPage",sc);
     }
-
-    public int searchResultCnt() throws Exception {
-        return session.selectOne(namespace+"searchResultCnt");
+    @Override
+    public int searchResultCnt(SearchCondition sc) throws Exception {
+        return session.selectOne(namespace+"searchResultCnt",sc);
     }
 
 }

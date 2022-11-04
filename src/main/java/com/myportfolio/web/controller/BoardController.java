@@ -2,6 +2,7 @@ package com.myportfolio.web.controller;
 
 import com.myportfolio.web.domain.BoardDto;
 import com.myportfolio.web.domain.PageHandler;
+import com.myportfolio.web.domain.SearchCondition;
 import com.myportfolio.web.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,21 +48,17 @@ public class BoardController {
         return "board";
     }
     @GetMapping("/")
-    public String list(Integer page, Integer pageSize, Model m,HttpServletRequest request){
-        if(page==null) page = 1;
-        if(pageSize==null) pageSize = 10;
-        try{
-            int totalCnt = boardService.getCount();
-            PageHandler pageHandler = new PageHandler(totalCnt,page,pageSize);
-            Map map = new HashMap();
-            map.put("offset",(page-1)*pageSize);
-            map.put("pageSize",pageSize);
+    public String list(SearchCondition sc,
+                       Model m, HttpServletRequest request){
 
-            List<BoardDto> list = boardService.getPage(map);
+        try{
+            int t_cnt = boardService.getSearchResultCnt(sc);
+            m.addAttribute("t_cnt",t_cnt);
+            PageHandler pageHandler = new PageHandler(t_cnt,sc);
+            List<BoardDto> list = boardService.getSearchResultPage(sc);
             m.addAttribute("list",list);
             m.addAttribute("ph",pageHandler);
-            m.addAttribute("page",page);
-            m.addAttribute("pageSize",pageSize);
+
         } catch (Exception e){
             e.printStackTrace();
         }
